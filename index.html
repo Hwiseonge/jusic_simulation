@@ -8,16 +8,22 @@
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
+            margin: 0;
+        }
+        h1, h2, h3, h4 {
+            margin: 10px 0;
         }
         .stock-container {
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
         .stock-wrapper {
             width: 48%;
             border: 1px solid black;
             padding: 10px;
             margin-top: 20px;
+            box-sizing: border-box;
         }
         .stock button {
             margin-left: 10px;
@@ -58,7 +64,33 @@
         .negative {
             color: blue;
         }
+    
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .stock-wrapper {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            #stocks {
+                display: block;
+            }
+            canvas {
+                height: 150px; /* 모바일에서 차트 높이를 작게 설정 */
+            }
+        }
+    
+        @media (max-width: 480px) {
+            #news {
+                padding: 5px;
+                font-size: 14px;
+            }
+            .stock button, .stock input {
+                font-size: 14px;
+                padding: 5px;
+            }
+        }
     </style>
+    
     <!-- Chart.js 라이브러리 추가 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
