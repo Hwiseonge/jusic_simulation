@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주식 시뮬레이션</title>
+    <title>주식 시뮬레이션(노말)</title>
     <!DOCTYPE html>
     <html lang="ko">
     <head>
@@ -132,7 +132,7 @@
             <div class="stock-wrapper">
                 <h2>농담곰 생산업체 A</h2>
                 <div class="stock">
-                    <p>가격: <span id="stockA_price">1000</span> 원</p>
+                    <p>가격: <span id="stockA_price">10000</span> 원</p>
                     <input type="number" id="stockA_quantity" value="1" min="1" />
                     <button onclick="buyStock('A')">구매</button>
                     <input type="number" id="stockA_sell_quantity" value="1" min="1" />
@@ -147,7 +147,7 @@
             <div class="stock-wrapper">
                 <h2>치이카와 생산업체 B</h2>
                 <div class="stock">
-                    <p>가격: <span id="stockB_price">1500</span> 원</p>
+                    <p>가격: <span id="stockB_price">10000</span> 원</p>
                     <input type="number" id="stockB_quantity" value="1" min="1" />
                     <button onclick="buyStock('B')">구매</button>
                     <input type="number" id="stockB_sell_quantity" value="1" min="1" />
@@ -162,7 +162,7 @@
             <div class="stock-wrapper">
                 <h2>모몽가 생산업체 C</h2>
                 <div class="stock">
-                    <p>가격: <span id="stockC_price">1200</span> 원</p>
+                    <p>가격: <span id="stockC_price">10000</span> 원</p>
                     <input type="number" id="stockC_quantity" value="1" min="1" />
                     <button onclick="buyStock('C')">구매</button>
                     <input type="number" id="stockC_sell_quantity" value="1" min="1" />
@@ -177,7 +177,7 @@
             <div class="stock-wrapper">
                 <h2>고로케 생산업체 D</h2>
                 <div class="stock">
-                    <p>가격: <span id="stockD_price">2000</span> 원</p>
+                    <p>가격: <span id="stockD_price">10000</span> 원</p>
                     <input type="number" id="stockD_quantity" value="1" min="1" />
                     <button onclick="buyStock('D')">구매</button>
                     <input type="number" id="stockD_sell_quantity" value="1" min="1" />
@@ -428,26 +428,7 @@
             setInterval(updateStockPrices, 2000); // 2초마다 주식 가격 업데이트
         
             // 뉴스 이벤트 처리 (C, D도 추가)
-            const positiveNewsA = ['A업체가 신약 개발을 성공했습니다!', 'A업체가 글로벌 시장에 진출합니다!'];
-            const negativeNewsA = ['A업체가 불법으로 유통했습니다!', 'A업체가 해킹 당했습니다!'];
-            const positiveNewsB = ['B업체가 신제품을 출시했습니다!', 'B업체가 흑자 전환에 성공했습니다!'];
-            const negativeNewsB = ['B업체가 노동자들을 해고했습니다!', 'B업체의 생산라인이 차질을 빚고 있습니다!'];
-            const positiveNewsC = ['C업체가 혁신적인 기술을 발표했습니다!', 'C업체가 해외 진출을 확대했습니다!'];
-            const negativeNewsC = ['C업체가 금융 사기를 당했습니다!', 'C업체가 주요 파트너와 결별했습니다!'];
-            const positiveNewsD = ['D업체가 경영권 인수를 발표했습니다!', 'D업체가 신제품을 발표했습니다!'];
-            const negativeNewsD = ['D업체가 제조사와의 계약을 해지했습니다!', 'D업체가 주요 경영진을 잃었습니다!'];
-        
-            function showEvent(stock) {
-                // 코드 예시로 추가할 수 있는 뉴스 이벤트 처리
-                
-                let eventText = '';
-                const rand = Math.random();
-                if (rand < 0.5) {
-                    eventText = stock === 'A' ? positiveNewsA[Math.floor(Math.random() * positiveNewsA.length)] : stock === 'B' ? positiveNewsB[Math.floor(Math.random() * positiveNewsB.length)] : stock === 'C' ? positiveNewsC[Math.floor(Math.random() * positiveNewsC.length)] : negativeNewsD[Math.floor(Math.random() * negativeNewsD.length)];
-                } else {
-                    eventText = stock === 'A' ? negativeNewsA[Math.floor(Math.random() * negativeNewsA.length)] : stock === 'B' ? negativeNewsB[Math.floor(Math.random() * negativeNewsB.length)] : stock === 'C' ? negativeNewsC[Math.floor(Math.random() * negativeNewsC.length)] : positiveNewsD[Math.floor(Math.random() * positiveNewsD.length)];
-                }
-                alert(eventText);}
+          
             
     
         function displayNews() {
@@ -466,19 +447,7 @@
             newsItem.textContent = news;
             newsItem.classList.add(positive ? 'positive' : 'negative');
     
-            // 최근 5개 뉴스만 표시
-            if (newsHistory.length >= 5) {
-                document.getElementById('newsList').removeChild(newsHistory.shift());
-            }
     
-            document.getElementById('newsList').appendChild(newsItem);
-            newsHistory.push(newsItem);
-    
-            if (news.includes('성공') || news.includes('성장') || news.includes('발표')) {
-                startStockEvent(randomStock, true);
-            } else if (news.includes('해킹') || news.includes('해고') || news.includes('차질')) {
-                startStockEvent(randomStock, false);
-            }
         }
     
         // 5초마다 뉴스 업데이트
@@ -521,24 +490,37 @@
         }
     
         // 30초마다 대공황 또는 GDP 상승 이벤트 발생
-        setInterval(() => {
-            const eventType = Math.random() < 0.5 ? 'recession' : 'gdpIncrease';
-            let eventMessage = '';
-            if (eventType === 'recession') {
-                // 대공황: 모든 주식 가격을 급격히 하락 (50% 하락)
-                stockPrices.A = Math.max(100, Math.floor(stockPrices.A * 0.5)); // 50% 하락
-                stockPrices.B = Math.max(100, Math.floor(stockPrices.B * 0.5)); // 50% 하락
-                eventMessage = "대공황이 발생했습니다! 주식 시장이 급락하고 있습니다.";
-            } else {
-                // GDP 상승: 모든 주식 가격을 상승 (20% 상승)
-                stockPrices.A = Math.floor(stockPrices.A * 1.5); // 20% 상승
-                stockPrices.B = Math.floor(stockPrices.B * 1.5); // 20% 상승
-                eventMessage = "GDP가 상승했습니다! 주식 시장이 상승하고 있습니다.";
-            }
+// 30초마다 대공황 또는 GDP 상승 이벤트 발생
+setInterval(() => {
+    const eventType = Math.random() < 0.5 ? 'recession' : 'gdpIncrease';
+    let eventMessage = '';
     
-            // 가격을 업데이트하고 차트에 반영
-            updateStockPrice('A', stockPrices.A);
-            updateStockPrice('B', stockPrices.B);
+    if (eventType === 'recession') {
+        // 대공황: 모든 주식 가격을 급격히 하락 (50% 하락)
+        stockPrices.A = Math.max(100, Math.floor(stockPrices.A * 0.5)); // 50% 하락
+        stockPrices.B = Math.max(100, Math.floor(stockPrices.B * 0.5)); // 50% 하락
+        stockPrices.C = Math.max(100, Math.floor(stockPrices.C * 0.5)); // 50% 하락
+        stockPrices.D = Math.max(100, Math.floor(stockPrices.D * 0.5)); // 50% 하락
+        
+        eventMessage = "대공황이 발생했습니다! 주식 시장이 급락하고 있습니다.";
+    } else {
+        // GDP 상승: 모든 주식 가격을 상승 (20% 상승)
+        stockPrices.A = Math.floor(stockPrices.A * 1.5); // 20% 상승
+        stockPrices.B = Math.floor(stockPrices.B * 1.5); // 20% 상승
+        stockPrices.C = Math.floor(stockPrices.C * 1.5); // 20% 상승
+        stockPrices.D = Math.floor(stockPrices.D * 1.5); // 20% 상승
+       
+        eventMessage = "GDP가 상승했습니다! 주식 시장이 상승하고 있습니다.";
+    }
+
+    // 가격을 업데이트하고 차트에 반영
+    updateStockPrice('A', stockPrices.A);
+    updateStockPrice('B', stockPrices.B);
+    updateStockPrice('C', stockPrices.C);
+    updateStockPrice('D', stockPrices.D);
+
+
+
     
             // 뉴스 섹션에 이벤트 추가
             const newsItem = document.createElement('div');
@@ -556,7 +538,7 @@
             if (newsHistory.length > 5) {
                 document.getElementById('newsList').removeChild(newsHistory.shift());
             }
-        }, 30000); // 30초마다 이벤트 발생
+        }, 10000); // 30초마다 이벤트 발생
     </script>
     
     
