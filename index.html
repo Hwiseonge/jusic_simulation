@@ -9,7 +9,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>주식 시뮬레이션normal</title>
+        <title>주식 시뮬레이션</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -166,15 +166,37 @@
             <div class="stock-wrapper">
                 <h2>모몽가 제약 C</h2>
                 <div class="stock">
-                    <p>가격: <말모드 </h3>
-                <h3>최종 보유 자산: ${balance} 원</h3>
+                    <p>가격: <span id="stockC_price">10000</span> 원</p>
+                    <input type="number" id="stockC_quantity" value="1" min="1" />
+                    <button onclick="buyStock('C')">구매</button>
+                    <input type="number" id="stockC_sell_quantity" value="1" min="1" />
+                    <button onclick="sellStock('C')">판매</button>
+                    <p>보유 수량: <span id="stockC_owned">0</span> 주</p>
+                </div>
+                <h4>주식 C 가격 변화</h4>
+                <canvas id="stockC_chart"></canvas>
             </div>
-        `;
-    }
-
-    const timerInterval = setInterval(updateTimer, 1000);
-    updateTimer(); // 즉시 실행
+        
+            <!-- 주식 D와 D 차트 -->
+            <div class="stock-wrapper">
+                <h2>고로케 식품 제조업체 D</h2>
+                <div class="stock">
+                    <p>가격: <span id="stockD_price">10000</span> 원</p>
+                    <input type="number" id="stockD_quantity" value="1" min="1" />
+                    <button onclick="buyStock('D')">구매</button>
+                    <input type="number" id="stockD_sell_quantity" value="1" min="1" />
+                    <button onclick="sellStock('D')">판매</button>
+                    <p>보유 수량: <span id="stockD_owned">0</span> 주</p>
+                </div>
+                <h4>주식 D 가격 변화</h4>
+                <canvas id="stockD_chart"></canvas>
+            </div>
+        
+            <!-- 주식 E와 E 차트 -->
   
+        </div>
+
+       
         <script>
 
     
